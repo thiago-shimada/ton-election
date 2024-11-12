@@ -36,7 +36,6 @@ message Vote {
 
 contract ElectionContract with Deployable, OwnableTransferable {
     owner: Address;
-    candidateRegistrationFee: Int as coins = ton("0.1");  // Fee to register as candidate
     candidates: map<Int, Candidate>;
     voters: map<Address, Voter>;
     candidateCount: Int as uint32;
@@ -196,10 +195,5 @@ contract ElectionContract with Deployable, OwnableTransferable {
         }
         let remainingTime: Int = self.votingEndTime - now();
         return remainingTime > 0 ? remainingTime : 0;
-    }
-
-    // Get registration fee
-    get fun getRegistrationFee(): Int {
-        return self.candidateRegistrationFee;
     }
 }
